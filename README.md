@@ -1,2 +1,4 @@
 # my-ino
-My InoReader
+## My InoReader
+
+Learn Go with ChatGPT by building a simple InoReader analogue.
