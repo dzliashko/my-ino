@@ -1,10 +1,7 @@
 package day02
 
 func IsPopular(subscribers int) bool {
-	if subscribers < 1000 {
-		return false
-	}
-	return true
+	return subscribers >= 1000
 }
 
 func ChannelRating(subscribers int) string {
