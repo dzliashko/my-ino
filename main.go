@@ -10,21 +10,6 @@ type Feed struct {
 	Articles    int
 }
 
-func feedInfo(feed Feed) string {
-	return fmt.Sprintf(
-		"Feed: %s\nURL: %s\nSubscribers: %d\nArticles: %d\nActive: %t\n",
-		feed.Name,
-		feed.URL,
-		feed.Subscribers,
-		feed.Articles,
-		feed.Active,
-	)
-}
-
-func feedRating(feed Feed) string {
-	return fmt.Sprintf("%s -> %s\n", feed.Name, channelRating(feed.Subscribers))
-}
-
 func channelRating(subscribers int) string {
 	switch {
 	case subscribers < 100:
@@ -38,11 +23,30 @@ func channelRating(subscribers int) string {
 	}
 }
 
+func (f Feed) Info() string {
+	return fmt.Sprintf(
+		"Feed: %s\nURL: %s\nSubscribers: %d\nArticles: %d\nActive: %t\n",
+		f.Name,
+		f.URL,
+		f.Subscribers,
+		f.Articles,
+		f.Active,
+	)
+}
+
+func (f Feed) Rating() string {
+	return fmt.Sprintf("%s -> %s\n", f.Name, channelRating(f.Subscribers))
+}
+
+func (f Feed) isPopular() bool {
+	return f.Subscribers >= 1000
+}
+
 func main() {
 	goFeed := Feed{
 		Name:        "Go Blog",
 		URL:         "https://go.dev/blog/feed.atom",
-		Subscribers: 1_500,
+		Subscribers: 500,
 		Active:      true,
 		Articles:    10_000,
 	}
@@ -54,9 +58,12 @@ func main() {
 		Articles:    100_000,
 	}
 
-	fmt.Print(feedInfo(goFeed))
-	fmt.Print(feedInfo(hnFeed))
+	fmt.Print(goFeed.Info())
+	fmt.Print(hnFeed.Info())
 
-	fmt.Print(feedRating(goFeed))
-	fmt.Print(feedRating(hnFeed))
+	fmt.Print(goFeed.Rating())
+	fmt.Print(hnFeed.Rating())
+
+	fmt.Println(goFeed.isPopular())
+	fmt.Println(hnFeed.isPopular())
 }
