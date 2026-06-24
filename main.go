@@ -35,10 +35,10 @@ func (f Feed) Info() string {
 }
 
 func (f Feed) Rating() string {
-	return fmt.Sprintf("%s -> %s\n", f.Name, channelRating(f.Subscribers))
+	return channelRating(f.Subscribers)
 }
 
-func (f Feed) isPopular() bool {
+func (f Feed) IsPopular() bool {
 	return f.Subscribers >= 1000
 }
 
@@ -61,9 +61,9 @@ func main() {
 	fmt.Print(goFeed.Info())
 	fmt.Print(hnFeed.Info())
 
-	fmt.Print(goFeed.Rating())
-	fmt.Print(hnFeed.Rating())
+	fmt.Printf("%s -> %s\n", goFeed.Name, goFeed.Rating())
+	fmt.Printf("%s -> %s\n", hnFeed.Name, hnFeed.Rating())
 
-	fmt.Println(goFeed.isPopular())
-	fmt.Println(hnFeed.isPopular())
+	fmt.Println(goFeed.IsPopular())
+	fmt.Println(hnFeed.IsPopular())
 }
