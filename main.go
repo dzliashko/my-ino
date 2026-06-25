@@ -33,7 +33,7 @@ func main() {
 	feeds := []Feed{goFeed, hnFeed}
 
 	for _, feed := range feeds {
-		feed.Info()
+		fmt.Print(feed.Info())
 	}
 
 	fmt.Println(totalSubscribers(feeds))
@@ -44,28 +44,28 @@ func main() {
 		fmt.Println(feed.Name)
 	}
 
-	arcticle1 := Article{
+	article1 := Article{
 		Title:       "Go 1.25 Released",
 		Description: "string",
 		Link:        "string",
 		PublishedAt: time.Now(),
 		Feed:        goFeed,
 	}
-	arcticle2 := Article{
+	article2 := Article{
 		Title:       "Understanding Goroutines",
 		Description: "string",
 		Link:        "string",
 		PublishedAt: time.Now(),
 		Feed:        goFeed,
 	}
-	articles := []Article{arcticle1, arcticle2}
+	articles := []Article{article1, article2}
 
 	printArticles(articles)
 
-	articlesByFeed := (articlesByFeed(goFeed, articles))
+	filteredArticles := (articlesByFeed(goFeed, articles))
 
-	for _, arcticle := range articlesByFeed {
-		fmt.Println(arcticle.ArticleInfo())
+	for _, article := range filteredArticles {
+		fmt.Println(article.ArticleInfo())
 	}
 }
 
@@ -155,11 +155,11 @@ func articlesByFeed(feed Feed, articles []Article) []Article {
 
 func (f Article) ArticleInfo() string {
 	return fmt.Sprintf(
-		"Title: %s\nDescription: %s\nLink: %d\nPublishedAt: %v\nFeed: %v\n",
+		"Title: %s\nDescription: %s\nLink: %s\nPublishedAt: %v\nFeed: %s\n",
 		f.Title,
 		f.Description,
 		f.Link,
 		f.PublishedAt,
-		f.Feed,
+		f.Feed.Name,
 	)
 }
