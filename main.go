@@ -42,7 +42,7 @@ func (f Feed) IsPopular() bool {
 	return f.Subscribers >= 1000
 }
 
-func totalSubscibers(feeds []Feed) int {
+func totalSubscribers(feeds []Feed) int {
 	var totalSubscribers int
 	for _, feed := range feeds {
 		totalSubscribers += feed.Subscribers
@@ -87,14 +87,16 @@ func main() {
 	fmt.Println(hnFeed.IsPopular())
 
 	feeds := []Feed{goFeed, hnFeed}
-	var totalSubs int
 
 	for _, feed := range feeds {
-		totalSubs += feed.Subscribers
-		fmt.Println(feed)
+		feed.Info()
 	}
-	fmt.Println(totalSubs)
 
-	fmt.Println(totalSubscibers(feeds))
-	fmt.Println(popularFeeds(feeds))
+	fmt.Println(totalSubscribers(feeds))
+
+	popular := popularFeeds(feeds)
+
+	for _, feed := range popular {
+		fmt.Println(feed.Name)
+	}
 }
