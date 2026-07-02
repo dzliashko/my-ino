@@ -47,6 +47,7 @@ func main() {
 	for _, feed := range popular {
 		fmt.Println("-", feed.Name)
 	}
+}
 
 	article1 := domain.Article{
 		Title:       "Go 1.25 Released",
@@ -76,4 +77,16 @@ func main() {
 	for _, article := range service.ArticlesByFeed(goFeed, articles) {
 		fmt.Print(article.Info())
 	}
+	return result
+}
+
+func (f Article) ArticleInfo() string {
+	return fmt.Sprintf(
+		"Title: %s\nDescription: %s\nLink: %s\nPublishedAt: %v\nFeed: %s\n",
+		f.Title,
+		f.Description,
+		f.Link,
+		f.PublishedAt,
+		f.Feed.Name,
+	)
 }
